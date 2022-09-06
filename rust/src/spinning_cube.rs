@@ -34,13 +34,13 @@ impl SpinningCube {
     // In Godot script-classes do not actually inherit the parent class.
     // Instead they are "attached" to the parent object, called the "owner".
     // The owner is passed to every single exposed method.
-    #[export]
-    unsafe fn _ready(&mut self, owner: &MeshInstance) {
+    #[method]
+    unsafe fn _ready(&mut self, #[base] owner: &MeshInstance) {
         owner.set_physics_process(true);
     }
 
-    #[export]
-    unsafe fn _physics_process(&mut self, owner: &MeshInstance, delta: f64) {
+    #[method]
+    unsafe fn _physics_process(&mut self, #[base] owner: &MeshInstance, delta: f64) {
         use gdnative::api::SpatialMaterial;
 
         self.time += delta as f32;
